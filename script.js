@@ -1,49 +1,54 @@
-// Mobile Menu Toggle
+// Mobile menu toggle
 const mobileMenuBtn = document.getElementById("mobileMenuBtn");
 const mainNav = document.getElementById("mainNav");
 
-mobileMenuBtn.addEventListener("click", () => {
-  mainNav.classList.toggle("active");
-});
-
-// Close mobile menu when clicking on a link
-const navLinks = document.querySelectorAll(".nav-link");
-navLinks.forEach((link) => {
-  link.addEventListener("click", () => {
-    mainNav.classList.remove("active");
+if (mobileMenuBtn) {
+  mobileMenuBtn.addEventListener("click", () => {
+    mainNav.classList.toggle("active");
+    mobileMenuBtn.classList.toggle("active");
   });
-});
+}
 
-// Testimonials Slider
+// Testimonial slider
 const testimonialTrack = document.getElementById("testimonialTrack");
 const prevBtn = document.getElementById("prevBtn");
 const nextBtn = document.getElementById("nextBtn");
 
-let currentSlide = 0;
-const totalSlides = document.querySelectorAll(".testimonial-card").length;
+if (testimonialTrack && prevBtn && nextBtn) {
+  let currentIndex = 0;
+  const cards = testimonialTrack.querySelectorAll(".testimonial-card");
+  const totalCards = cards.length;
 
-function updateSlider() {
-  const offset = -currentSlide * 100;
-  testimonialTrack.style.transform = `translateX(${offset}%)`;
+  function updateSlider() {
+    const sliderWidth = testimonialTrack.parentElement.offsetWidth;
+    const translateAmount = sliderWidth * currentIndex;
+    testimonialTrack.style.transform = `translateX(-${translateAmount}px)`;
+  }
+
+  nextBtn.addEventListener("click", () => {
+    currentIndex = (currentIndex + 1) % totalCards;
+    updateSlider();
+  });
+
+  prevBtn.addEventListener("click", () => {
+    currentIndex = (currentIndex - 1 + totalCards) % totalCards;
+    updateSlider();
+  });
+
+  window.addEventListener("resize", updateSlider);
 }
 
-prevBtn.addEventListener("click", () => {
-  currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-  updateSlider();
-});
+// Contact form submission
+const contactForm = document.getElementById("contactForm");
+if (contactForm) {
+  contactForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    alert("Thank you for your message! We will get back to you soon.");
+    contactForm.reset();
+  });
+}
 
-nextBtn.addEventListener("click", () => {
-  currentSlide = (currentSlide + 1) % totalSlides;
-  updateSlider();
-});
-
-// Auto-advance testimonials every 5 seconds
-setInterval(() => {
-  currentSlide = (currentSlide + 1) % totalSlides;
-  updateSlider();
-}, 5000);
-
-// Smooth Scrolling for Navigation Links
+// Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   anchor.addEventListener("click", function (e) {
     e.preventDefault();
@@ -53,47 +58,11 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         behavior: "smooth",
         block: "start",
       });
+      // Close mobile menu if open
+      if (mainNav.classList.contains("active")) {
+        mainNav.classList.remove("active");
+        mobileMenuBtn.classList.remove("active");
+      }
     }
   });
-});
-
-// Contact Form Submission
-const contactForm = document.getElementById("contactForm");
-
-contactForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  // Get form data
-  const formData = {
-    name: document.getElementById("name").value,
-    email: document.getElementById("email").value,
-    phone: document.getElementById("phone").value,
-    location: document.getElementById("location").value,
-    message: document.getElementById("message").value,
-  };
-
-  // Here you would typically send the data to a server
-  console.log("Form submitted:", formData);
-
-  // Show success message
-  alert("Thank you for your message! We will get back to you soon.");
-
-  // Reset form
-  contactForm.reset();
-});
-
-// Header scroll effect
-let lastScroll = 0;
-const header = document.querySelector(".header");
-
-window.addEventListener("scroll", () => {
-  const currentScroll = window.pageYOffset;
-
-  if (currentScroll > 100) {
-    header.style.boxShadow = "0 2px 8px rgba(0, 0, 0, 0.1)";
-  } else {
-    header.style.boxShadow = "0 1px 3px rgba(0, 0, 0, 0.1)";
-  }
-
-  lastScroll = currentScroll;
 });
