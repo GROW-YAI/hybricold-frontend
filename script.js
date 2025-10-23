@@ -63,7 +63,7 @@ form.addEventListener("submit", (e) => {
   const message = document.getElementById("message").value;
 
   // Build WhatsApp message
-  const text = `Hello, I'm ${name}%0AEmail: ${email}%0ASubject: ${subject}%0A%0AMessage:%0A${message}`;
+  const text = `This message is from ${name}%0AEmail: ${email}%0ASubject: ${subject}%0A%0AMessage:%0A${message}`;
 
   // Create WhatsApp link
   const url = `https://wa.me/${phoneNumber}?text=${text}`;
