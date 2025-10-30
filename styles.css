@@ -311,7 +311,7 @@ body {
 }
 
 .testimonial-card {
-  min-width: 100%;
+  width: 100%;
   flex-shrink: 0;
 }
 
