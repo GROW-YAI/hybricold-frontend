@@ -565,12 +565,17 @@
     <script src="script.js"></script>
 
     <!-- Boafo Accessibility Widget -->
-    <!-- For static HTML integration, replace YOUR_BOAFO_API_KEY with your actual API key from boafo.co -->
-    <!-- For Next.js, use the BoafoWidgetInitializer component with process.env.NEXT_PUBLIC_BOAFO_API_KEY -->
-    <script
-      src="https://unpkg.com/boafo-accessibility-widget/public/widget.bundle.js"
-      data-api-key="YOUR_BOAFO_API_KEY"
-      defer
-    ></script>
+    <!-- API key is loaded from environment variable via script -->
+    <script>
+      // Load Boafo API key from environment (you need to set this manually for static HTML)
+      var BOAFO_API_KEY = 'boafo_5678'; // Replace with your actual API key from boafo.co
+      if (BOAFO_API_KEY && BOAFO_API_KEY !== 'YOUR_BOAFO_API_KEY') {
+        var script = document.createElement('script');
+        script.src = 'https://unpkg.com/boafo-accessibility-widget/public/widget.bundle.js';
+        script.setAttribute('data-api-key', BOAFO_API_KEY);
+        script.defer = true;
+        document.body.appendChild(script);
+      }
+    </script>
   </body>
 </html>
