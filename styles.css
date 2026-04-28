@@ -11,6 +11,7 @@ body {
   line-height: 1.6;
   color: #333;
   overflow-x: hidden;
+  padding-top: 80px;
 }
 
 .container {
@@ -23,8 +24,10 @@ body {
 .header {
   background: #fff;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
   padding: 1rem 0;
 }
@@ -33,6 +36,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 }
 
 .logo img {
@@ -44,6 +48,7 @@ body {
   display: flex;
   gap: 2rem;
   align-items: center;
+  margin-left: auto;
 }
 
 .nav-link {
@@ -639,6 +644,7 @@ textarea.form-input {
     padding: 1rem;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     display: none;
+    margin-top: 10px;
   }
 
   .nav.active {
